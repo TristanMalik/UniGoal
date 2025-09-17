@@ -1,3 +1,5 @@
+<details>
+<summary>Tugas individu 2!</summary>
 1. Membuat sebuah proyek baru
     Inisialisasi proyek menggunakan command `django-admin startproject UniGoal .` yang mana membuat direktori dasar dan files penting untuk aplikasi Django.
 
@@ -65,3 +67,82 @@ Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan 
 
 Apakah ada feedback untuk asisten dosen tutorial 1 yang telah kamu kerjakan sebelumnya?
 Asdos baik.
+</details>
+
+<details>
+<summary>Tugas individu 3</summary>
+1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+    Agar aplikasi dapat bertukar informasi antara client dan server.
+
+2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+    JSON biasanya dianggap lebih baik karena lebih ringan dan lebih cepat diproses.
+
+3. Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut?
+Method `is_valid()` digunakan untuk cek data dari form jika sesuai dengan validasi dari form atau model.
+
+4. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+    `csrf_token` digunakan oleh django untuk mencegah cross site request forgery. Jika tidak menggunakan tokennya, form menjadi rentan serangan csrf. Penyerang dapat melakukan csrf untuk membuat user melakukan aksi diluar pengetahuannya.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    1. Tambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.
+    ```python
+    def show_xml(request):
+     product_list = Product.objects.all()
+     xml_data = serializers.serialize("xml", product_list)
+     return HttpResponse(xml_data, content_type="application/xml")
+
+    def show_xml_by_id(request, product_id):
+   try:
+       product_item = Product.objects.filter(pk=product_id)
+       xml_data = serializers.serialize("xml", product_item)
+       return HttpResponse(xml_data, content_type="application/xml")
+   except Product.DoesNotExist:
+       return HttpResponse(status=404)
+
+    def show_json(request):
+    product_list = Product.objects.all()
+    json_data = serializers.serialize("json", product_list)
+    return HttpResponse(json_data, content_type="application/json")
+
+    def show_json_by_id(request, product_id):
+   try:
+       product_item = Product.objects.get(pk=product_id)
+       json_data = serializers.serialize("json", [product_item])
+       return HttpResponse(json_data, content_type="application/json")
+   except Product.DoesNotExist:
+       return HttpResponse(status=404)
+       ```
+    2. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 1.
+        menaruh path yang cocok ke dalam `urls.py` yang berada pada directory main
+        ```python
+            urlpatterns = [
+        path('', show_main, name='show_main'),
+        path('create/', product_create, name='product_create'),
+        path('detail/<int:id>/', show_product, name='show_product'),
+        path('xml/', show_xml, name='show_xml'),
+        path('json/', show_json, name='show_json'),
+        path('xml/<str:product_id>/', show_xml_by_id, name='show_xml_by_id'),
+        path('json/<str:product_id>/', show_json_by_id, name='show_json_by_id'),
+        ]
+        ```
+    
+    3. Membuat halaman yang menampilkan data objek model yang memiliki tombol "Add" yang akan redirect ke halaman form, serta tombol "Detail" pada setiap data objek model yang akan menampilkan halaman detail objek.
+        tambahkan button-button yang sesuai pada halaman dan href ke url yang cocok
+        ```python
+    <a href="{% url 'main:product_create' %}">
+    <button>+ Add Product</button>
+    </a>
+    <a href="{% url 'main:show_product' product.id %}">
+        {{ product.name }}
+    </a>
+        ```
+    
+    4. Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
+        membuat html yang handle untuk opsi add product.
+    
+    5.  Membuat halaman yang menampilkan detail dari setiap data objek model.
+        membuat html untuk handle opsi detail saat sudah ada produk yang terdisplay di halaman utama
+
+
+
+</details>
