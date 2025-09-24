@@ -112,8 +112,8 @@ Method `is_valid()` digunakan untuk cek data dari form jika sesuai dengan valida
    except Product.DoesNotExist:
        return HttpResponse(status=404)
        ```
-    2. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 1.
-        menaruh path yang cocok ke dalam `urls.py` yang berada pada directory main
+2. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 1.
+menaruh path yang cocok ke dalam `urls.py` yang berada pada directory main
         ```python
             urlpatterns = [
         path('', show_main, name='show_main'),
@@ -126,8 +126,8 @@ Method `is_valid()` digunakan untuk cek data dari form jika sesuai dengan valida
         ]
         ```
     
-    3. Membuat halaman yang menampilkan data objek model yang memiliki tombol "Add" yang akan redirect ke halaman form, serta tombol "Detail" pada setiap data objek model yang akan menampilkan halaman detail objek.
-        tambahkan button-button yang sesuai pada halaman dan href ke url yang cocok
+3. Membuat halaman yang menampilkan data objek model yang memiliki tombol "Add" yang akan redirect ke halaman form, serta tombol "Detail" pada setiap data objek model yang akan menampilkan halaman detail objek.
+tambahkan button-button yang sesuai pada halaman dan href ke url yang cocok
         ```python
     <a href="{% url 'main:product_create' %}">
     <button>+ Add Product</button>
@@ -137,12 +137,51 @@ Method `is_valid()` digunakan untuk cek data dari form jika sesuai dengan valida
     </a>
         ```
     
-    4. Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
-        membuat html yang handle untuk opsi add product.
+4. Membuat halaman form untuk menambahkan objek model pada app sebelumnya.
+    membuat html yang handle untuk opsi add product.
     
-    5.  Membuat halaman yang menampilkan detail dari setiap data objek model.
-        membuat html untuk handle opsi detail saat sudah ada produk yang terdisplay di halaman utama
+5.  Membuat halaman yang menampilkan detail dari setiap data objek model.
+    membuat html untuk handle opsi detail saat sudah ada produk yang terdisplay di halaman utama
+
+</details>
 
 
+<details>
+<summary>Tugas individu 4</summary>
+1. Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
+    AuthenticationForm adalah form bawaan Django (django.contrib.auth.forms.AuthenticationForm) yang dipakai untuk login user. Form ini otomatis menyertakan field username dan password, lalu melakukan validasi ke sistem auth Django.
+    Kelebihan:
+    -langsung terintegrasi dari Django
+    -ada validasi otomatis
+    -mudah dipakai dengan login
+    Kekurangan:
+    -Hanya bisa menggunakan username dan password. Jika ingin email atau autentikasi multi-faktor perlu kustomisasi
+    -tampilan defaultnya basic
 
+2. Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
+    Autentikasi adalah proses memverifikasi user, seperti saat user login dengan username dan password. Otorisasi adalah penentuan apa saja yang user boleh lakukan setelah terautentikasi.
+
+    Django mengimplementasikan autentikasi dengan `django.contrib.auth`, login/logout function, dan `AuthenticationForm`
+
+    Otorisasi dengan @login_required
+
+3. Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
+    Cookies:
+        Kelebihan:
+        -Ringan pada server karena disimpan di browser
+        Kekurangan:
+        -mudah dimodifikasi user, kurang aman jika menyimpan data sensitif
+        -batas ukuran 4KB per cookie
+    Sessions:
+        Kelebihan:
+        -Dapat menyimpan data yang lebih besar/kompleks
+        Kekurangan:
+        -membutuhkan storage/database untuk session yang bisa membebani server
+        -perlu fungsionalitas cleanup untuk expired session
+
+
+4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
+    Secara default, penggunaan cookies dalam pengembangan web tidak sepenuhnya aman karena cookies rentan terhadap serangan seperti XSS (Cross-Site Scripting) dan session hijacking. Hal ini disebabkan karena cookie tersimpan di sisi klien dan bisa diakses atau dimodifikasi jika tidak dilindungi dengan benar.
+
+    Django dapat menangani hal-hal tersebut dengan menggunakan csrf token, mencegah akses  scripting javascript untuk serangan XSS.
 </details>
