@@ -185,3 +185,48 @@ tambahkan button-button yang sesuai pada halaman dan href ke url yang cocok
 
     Django dapat menangani hal-hal tersebut dengan menggunakan csrf token, mencegah akses  scripting javascript untuk serangan XSS.
 </details>
+
+
+<details>
+<summary>Tugas individu 5</summary>
+1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+    Urutan prioritas dalam CSS:
+    -   Inline style (misalnya <div style="color:red">) paling tinggi.
+    -   ID selector (#id), lebih tinggi dibanding class.
+    -   Class, attribute, pseudo-class selector (.class, [type=text], :hover).
+    -   Tag/element selector (div, p, h1).
+    -   Universal selector (*) dan pewarisan (inheritance), paling rendah. 
+
+2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+
+    - Karena user dapat menggunakan perangkat yang berbeda-beda, jadi bisa sesuai dengan ukuran layar perangkat user.
+    
+    contoh aplikasi menerapkan responsive design:
+    -   Instagram
+    -   tokopedia
+    contoh aplikasi tidak menerapkan responsive design
+    -   berkshirehathaway.com
+
+3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+    -   Margin adalah ruang di luar border, jarak antar elemen
+        '''html
+        div { margin: 20px; }
+        '''
+
+    -   Border adalah garis tepi elemen
+        ```html
+        div { border: 2px solid black; }
+        ```
+
+    -   Padding adalah ruang antara isi konten dan border
+        ```html
+        div { padding: 15px; }
+        ```
+    urutan: content -> padding -> border -> margin
+
+4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+    -   Flexbox mengatur placement satu dimensi horizontal/vertikal. berguna untuk menyusun elemen sejajar navbar atau daftar produk
+
+    -   Grid Layout mengatur placement dua dimensi dengan mengatur elemen berdasarkan baris dan kolom. Lebih cocok untuk layout page yang lebih kompleks seperti sidebar.
+</details>
