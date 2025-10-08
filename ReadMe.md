@@ -230,3 +230,25 @@ tambahkan button-button yang sesuai pada halaman dan href ke url yang cocok
 
     -   Grid Layout mengatur placement dua dimensi dengan mengatur elemen berdasarkan baris dan kolom. Lebih cocok untuk layout page yang lebih kompleks seperti sidebar.
 </details>
+
+<details>
+<summary>Tugas individu 6</summary>
+1. Apa perbedaan antara synchronous request dan asynchronous request?
+    -Synchronous request: browser menunggu server menyelesaikan respons sebelum bisa melakukan tindakan lain.
+    -Asynchronous request: browser mengirim request di background tanpa refresh halaman.
+        Hasilnya bisa langsung ditampilkan di bagian tertentu dari halaman.
+
+2. Bagaimana AJAX bekerja di Django (alur request–response)?
+    User action -> fetch() atau httprequest untuk mengirim request ke url django -> request diproses oleh views -> return data dalam format json -> js menerima respons json -> menampilkan hasil di page tanpa reload.
+
+3. Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+    -tidak perlu reload page saat ada perubahan data
+    -user dapat berinteraksi dengan page secara dinamis
+    -Dapat menghemat bandwidth karena page tidak perlu full reload
+
+4. Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+    Menggunakan csrf token, secure cookie, menggunakan strip_tags
+
+5. Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+    AJAX meningkatkan user experience karena memungkinkan interaksi yang lebih cepat. Webpage terasa lebih dinamis karena mengurangi waiting time setiap ada data baru.
+</details>
